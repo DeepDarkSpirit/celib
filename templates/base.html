@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+    {% block insert %}
+        {% load staticfiles %}
+
+        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" >
+        <link rel="stylesheet" href="{% static "css/responsive-nav.css" %}">
+        <link rel="stylesheet" href="{% static "css/styles.css" %}">
+        <script src="{% static "js/laydate-master/laydate.js" %}"></script>
+        <script src="{% static "js/jquery-2.1.1.js" %}"></script>
+        <script src="{% static "js/bootstrap.min.js" %}"></script>
+        <script src="{% static "js/responsive-nav.js" %}"></script>
+        <script src="{% static "js/unslider.js" %}"></script>
+    {% endblock %}
+</head>
+<style type="text/css">
+	body { color: #edf; background:#f1f1f1;padding:0 5em;margin:0}
+	h1{ padding: 6 em lem;  }
+	h2{ color:#bf8; border-top: 1px dotted #fff; }
+	p { margin:lem 0}
+	</style>
+<body>
+
+    {% block header %}
+        <div class="container-fluid">
+
+        {% block wraptype %}
+
+        {% endblock %}
+        <div id="header">
+                <div class="logo">
+                    <a href="/" class="">
+                        <img src="{% static "pic/logo.jpg" %}" alt="普信恒业科技发展（北京）有限公司">
+                    </a>
+					<h1><center>~图书馆管理系统~</center></h1>
+                </div>
+                <div id="navbar">
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/loans">借阅登记</a></li>
+                        <li><a href="/books">书籍管理</a></li>
+                        <li><a href="/users">员工信息</a></li>
+                    </ul>
+                </div>
+            </div>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+
+            <div id="footer">
+                <div class="panel panel-default" id="hoteldescription">
+                    <div class="panel-body">
+                        全国免费咨询电话：400-6099-800（财富管理） 400-6099-600 （普惠金融）
+                        </br>
+                        普信恒业科技发展（北京）有限公司
+                        </br>
+                        @All Rights Reserved
+						</br>
+						<a href="/admin" >admin入口</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <script>
+            var navigation = responsiveNav("#navbar", {
+                animate: true,
+                // Boolean: 是否启动CSS过渡效果（transitions）， true 或 false
+                transition: 400,
+                // Integer: 过渡效果的执行速度，以毫秒（millisecond）为单位
+                label: "Menu",
+                // String: Label for the navigation toggle
+                insert: "after",
+                // String: Insert the toggle before or after the navigation
+                customToggle: "",
+                // Selector: Specify the ID of a custom toggle
+                openPos: "relative",
+                // String: Position of the opened nav, relative or static
+                jsClass: "js",
+                // String: 'JS enabled' class which is added to <html> el
+                debug: false,
+                // Boolean: Log debug messages to console, true 或 false
+                init: function() {},
+                // Function: Init callback
+                open: function() {},
+                // Function: Open callback
+                close: function() {} // Function: Close callback
+            });
+
+        </script>
+    {% endblock %}
+
+</body>
+</html>

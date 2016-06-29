@@ -1,0 +1,70 @@
+﻿<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <p style="color:white">您搜索的是 <span style="color:green"><strong>{{ query }}</span>。<input type=button value='重新搜索' onclick="window.history.back()"</strong></p>
+
+{% if books %}
+{% for book in books %}
+{% endfor %}
+<script>
+var turebooklength=0;
+var booklength={{ books|length }}-turebooklength;
+</script>
+    <p style="color:white">找到<span id="demo" style="color:green"></span>本书.</p>
+
+
+	 <table style="color:white" border="1" frame="box">
+	 <tr>
+<th><p>编号</p></th>
+<th><p>书名</p></th>
+<th><p>作者</p></th>
+<th><p>出版社</p></th>
+<th></th>
+<th></th>
+</tr><script>var num=0</script><!--行号-->
+        {% for book in books %}
+	<tr  id='{{book.bookid}}' style="font-size:13px;color:white" style="display:block">
+	<div>
+					<td>{{ book.bookid|floatformat }}</td>
+					<td>{{ book.bookname}}</td>
+                    <td>{{ book.author }}</td>
+					<td>{{ book.press }}</td>
+					<td>
+					<a style="font-size:13px;color:#0665C5" href="/editBooks/?bookid={{ book.bookid }}" >修改</a> 
+					</td>
+					<td>
+					<a style="font-size:13px;color:#0665C5" href="javascript:if(confirm('确认删除吗?'))window.location='/deleBooks/?bookid={{ book.bookid }}'">删除</a> 
+					</td>
+					
+	</div>
+		</tr>
+	<script>
+					var x={{book.state}};
+					if (x=='0')
+						{
+						document.getElementById({{book.bookid}}).style.display='none';
+						turebooklength=turebooklength+1;
+						}
+					function delcfm() 
+					{
+					if (!confirm("确认要删除？")) 
+						{
+						window.event.returnValue = false;
+						}
+					}	
+					</script>
+        {% endfor %}
+<script>
+var booklength={{ books|length }}-turebooklength;
+
+document.getElementById("demo").innerHTML=booklength;
+</script>		
+</table>
+{% else %}
+    <p style="color:white">没有找到您搜索的书籍</p>
+{% endif %}
+
+</body>
+</html>

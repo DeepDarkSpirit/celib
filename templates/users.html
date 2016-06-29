@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}员工信息{% endblock %}
+{% block wraptype %}
+    <div class="wrap room">
+{% endblock %}
+{% block content %}
+                <div class="banner">
+                <ul>
+                    <li>
+                        {% load staticfiles %}
+                        <img src="{% static "pic/key_home_1.jpg" %} ">
+                    </li>
+                </ul>
+
+                <div class="order">
+				<a href="/users" ><h2>新增员工</font></h2></a>
+				</div>
+				
+				</div>
+
+
+ <div id="hotelDescription">
+ <div>
+ {% if errors %}
+       <ul>{% for error in errors %}
+	   <p style="color:red;font-size: 4em;">{{ error}}</p>
+        </ul> {% endfor %}
+	{% endif %}
+	 </div>
+ <div>
+ {% if deleerror %}
+       <ul>
+	   <p style="color:red;font-size: 4em;">{{ deleerror}}</p>
+        </ul> 
+	{% endif %}
+	 </div>
+ <div style="width:600px;float:left">
+	<p style="color:white;font-size:30px;">员工信息</p>
+ <table border="2" frame="box">
+<tr>
+<th><h4>行号&nbsp;</h4></th>
+<th><h4>员工编号&nbsp;</h4></th>
+<th><h4>员工姓名&nbsp;</h4></th>
+<th><h4>手机&nbsp;</h4></th>
+</tr><script>var num=0</script><!--行号-->
+  {% for post in posts %}
+    <tr  id='{{post.userid}}' style="font-size:13px;"style="display:block">
+	<div  >
+	<script>
+					var x={{post.state}};
+					if (x=='0')
+						{
+						document.getElementById({{post.userid}}).style.display='none';
+						}
+						
+function test() 
+{
+	var _form=document.newuserform;
+	if(_form.username.value=='')
+	{
+	alert("带*必填项不能为空");
+	_form.bookname.focus();
+	return false;
+	}	
+	if(_form.username.value.length>50)
+	{
+	alert("员工姓名不能超过50个字符！");
+	_form.bookname.focus();
+	return false;
+	}
+	var re=/^(13[0-9]{9})|(15[89][0-9]{8})$/;   
+	if(!re.test(_form.mobile.value))
+	 {      
+	 alert('请输入正确的手机号码。');      
+	 return false;   
+	 }
+}
+					</script>
+					<td><script>
+					if(x=='0')
+					{
+					num=num;
+					}
+					else
+					{
+					num=num+1;
+					}
+					document.write(num);<!--行号-->
+					</script></td>
+					<td>{{ post.userid }}&nbsp;</td>
+					<td>{{ post.username }}&nbsp;</td>
+                    <td><p>{{ post.mobile }}&nbsp;</p></td>
+					<td>
+					<a style="font-size:16px;" href="javascript:if(confirm('确认删除吗?'))window.location='/deleUsers/?userid={{ post.userid }}'">删除</a> 
+					</td>
+	</div>
+	</tr>
+	
+    {% endfor %}
+
+</table>
+  </div>
+   
+                    <p style="color:white;font-size:30px;">新增员工</p>
+					<div>
+					<br>
+                    <p>
+                        <form action="/newUserResult" method="get"name="newuserform" onsubmit="test()">
+                           
+                            <h4>*员工姓名</h4>
+							<input  required="required" type="text" name="username" style="color:gray" placeholder="请输入员工姓名" onpropertychange="this.style.color='black'" oninput="this.style.color='black'"> 
+							<h4>手机</h4>
+							<input type="text" name="mobile" style="color:gray"maxlength="11" placeholder="请输入手机" onpropertychange="this.style.color='black'" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" oninput="this.style.color='black' "> 
+							<input type="submit" style="font-size:13px;color:black;"value="提交">
+                        </form>
+                    </p>
+					</div>
+  </div>
+{% endblock %}

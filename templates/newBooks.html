@@ -1,0 +1,111 @@
+﻿{% extends "base.html" %}
+{% block title %}新增图书{% endblock %}
+{% block wraptype %}
+<div class="wrap order about">
+{% endblock %}
+{% block content %}
+{% if errors %}
+       <div style="width: 500px;margin: 0 auto; position: relative;margin-top: 55px; ">
+	     {% for error in errors %}
+	   <p style="color:red;font-size:4em;text-align:center;">{{ error }}</p>
+	    {% endfor %}
+        </div>
+	{% endif %}
+<div class="banner">
+                <ul>
+                    <li>
+                        {% load staticfiles %}
+                         <img src="{% static "pic/key_home_1.jpg" %} "">
+                    </li>
+                </ul>
+<div style="background:rgba(255,255,255,0.6);
+  right: 40px;
+  bottom: 40px;
+  padding-left: 40px;
+  border: 5px solid rgba(255,255,255,0.4);
+  font-size: 1.4em;
+  color: #fff;
+  text-shadow: 1px 1px rgba(0,0,0,0.2);
+  text-align:center;
+  margin:0px auto;
+  width:400px;height:400px; 
+  position:absolute;
+  left:50px;top:10px; 
+  ">
+				
+<script>
+function test() 
+{
+	var _form=document.newbookform;
+	if(_form.bookname.value=='')
+	{
+	alert("带*必填项不能为空");
+	_form.bookname.focus();
+	return false;
+	}
+	if(_form.author.value=='')
+	{
+	alert("带*必填项不能为空");
+	_form.author.focus();
+	return false;
+	}
+	if(_form.press.value=='')
+	{
+	alert("带*必填项不能为空");
+	_form.press.focus();
+	return false;
+	}
+	if(_form.qty.value=='')
+	{
+	alert("带*必填项不能为空");
+	_form.qty.focus();
+	return false;
+	}
+	if(_form.bookname.value.length>50)
+	{
+	alert("书名不能超过50个字符！");
+	_form.bookname.focus();
+	return false;
+	}
+	if(_form.author.value.length>50)
+	{
+	alert("作者不能超过50个字符！");
+	_form.author.focus();
+	return false;
+	}
+	if(_form.press.value.length>50)
+	{
+	alert("出版社不能超过50个字符！");
+	_form.press.focus();
+	return false;
+	}
+	if(_form.qty.value.length>50)
+	{
+	alert("数量不能超过50个字符！");
+	_form.qty.focus();
+	return false;
+	}
+}
+
+</script>
+<h1 style="color:#BBFF88;">新增图书:</h1>
+-------------------------------------------------------
+<p>
+<form name="newbookform" onsubmit="test()" action="/newBookResult" method="get">
+<p style="color:black">*书名</p>
+<input required="required"   style="font-size: 1em;" type="text" name="bookname" style="color:gray" placeholder="请输入书名" onpropertychange="this.style.color='black'" oninput="this.style.color='black'"> 
+<p style="color:black">*作者</p>
+<input required="required"  style="font-size: 1em;" type="text" name="author" style="color:gray" placeholder="请输入作者" onpropertychange="this.style.color='black'" oninput="this.style.color='black'"> 
+<p style="color:black">*出版社</p>
+<input required="required"   style="font-size: 1em;" type="text" name="press" style="color:gray" placeholder="请输入出版社" onpropertychange="this.style.color='black'" oninput="this.style.color='black'"> 
+<p style="color:black">*数量</p>
+<!--只能输入数字-->
+<input required="required"  style="font-size: 1em;" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" type="text" name="qty" style="color:gray" placeholder="请输入数量" onpropertychange="this.style.color='black'" oninput="this.style.color='black'"> 
+<input type="submit" value="提交">
+</form>
+</p>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

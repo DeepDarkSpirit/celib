@@ -1,0 +1,31 @@
+﻿{% extends "base.html" %}
+{% block title %}编辑图书{% endblock %}
+{% block wraptype %}
+    <div class="wrap room">
+{% endblock %}
+{% block content %}
+ <div class="banner">
+                <ul>
+                    <li>
+                        {% load staticfiles %}
+                        <img src="{% static "pic/key_home_1.jpg" %} ">
+                    </li>
+                </ul>
+
+                <div class="order"><a href="/loans"><h2>借书</h2></a></div>
+				</div>
+				
+<div id="hotelDescription">
+                    <h2>编辑结果</h2>
+                    <p> 
+                        <h4>书名：{{ post.bookname}}</h4>
+					
+						<p>书籍编号：{{ post.bookid|floatformat }}</p>
+                        <p>作者：{{ post.author }}</p>
+						<p>出版社：{{ post.press }}</p>
+                        <p>数量：{{ post.qty |floatformat}}</p> 
+                    </p>
+                </div>
+            </div>
+		
+{% endblock %}

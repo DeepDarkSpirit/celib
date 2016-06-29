@@ -1,0 +1,28 @@
+﻿<html>
+<head>
+    <title>loanlist</title>
+</head>
+<body>
+
+{% for post in posts %}
+ <div style="width:350px;">
+<span style="font-size:22px">借阅编号：{{ post.loanid }}</span><br>
+借阅人编号：{{ post.userid }}<br>
+借阅书编号：{{ post.bookid }}<br>
+借阅时间：{{ post.fromdate }}<br>
+预计归还时间：{{ post.todate }}<br>
+	{% if post.realdate %}
+实际归还时间：{{ post.realdate }}<br>
+	{% endif %}
+备注：<div  style="width:190px;">{{ post.remark }}</div>
+{% if not post.realdate %}
+	<a style="font-size:16px;" href="javascript:if(confirm('确认还书吗?')){window.parent.parent.location.href='/returnbooks/?loanid={{ post.loanid }}';}">还书</a> 
+	<br>
+	{% endif %}
+	<br>
+{% endfor %}
+
+  </div>
+
+</body>
+</html>

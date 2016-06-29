@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}书籍管理{% endblock %}
+{% block wraptype %}
+    <div class="wrap room">
+{% endblock %}
+{% block content %}
+                <div class="banner">
+                <ul>
+                    <li>
+                        {% load staticfiles %}
+                        <img src="{% static "pic/key_home_1.jpg" %} ">
+                    </li>
+                </ul>
+
+                <div class="order">
+				<a href="/newBooks" ><h2>新增图书</font></h2></a>
+				</div>
+				
+				</div>
+
+
+ <div id="hotelDescription">
+ <div>
+ {% if errors %}
+       <ul>
+	   <p style="color:red;font-size: 4em;">{{ errors }}</p>
+        </ul>
+	{% endif %}
+	 </div>
+ <div style="width:550px;float:left">
+	<p style="font-size:25px;color:white">书籍列表</p>
+ <table border="2" frame="box">
+<tr>
+<th><h4>行号&nbsp;</h4></th>
+<th><h4>编号&nbsp;</h4></th>
+<th><h4>书名&nbsp;</h4></th>
+<th><h4>作者&nbsp;</h4></th>
+<th><h4>出版社&nbsp;</h4></th>
+<th><h4>数量&nbsp;</h4></th>
+</tr><script>var num=0</script><!--行号-->
+  {% for post in posts %}
+  <tr  id='{{post.bookid}}' style="font-size:13px;" style="display:block">
+	<div>
+					<td><script>
+					if(x=='0')
+					{
+					num=num;
+					}
+					else
+					{
+					num=num+1;
+					}
+					document.write(num);<!--行号-->
+					</script></td>
+					<td>{{ post.bookid|floatformat }}&nbsp;</td>
+					<td>{{ post.bookname}}&nbsp;</td>
+                    <td><p>{{ post.author }}&nbsp;</p></td>
+					<td><p>{{ post.press }}&nbsp;</p></td>
+                     <td><p>{{ post.qty |floatformat}}&nbsp;</p></td>
+					 <td><p>&nbsp;</p></td>
+					 <td><p>&nbsp;</p></td>
+					<td>
+					<a href="/editBooks/?bookid={{ post.bookid }}" style="font-size:16px;">修改</a> 
+					</td>
+					<!--
+					<form action="/editBooks" method="get">
+					<input type="text" name="bookid" value="{{ post.bookid }}"  style="display:none;"></input> 						
+					<td><input type="submit" value="修改" style="color:black;"></td>
+					</form>	
+					-->
+					<td><p>&nbsp;</p></td>
+					<td><p>&nbsp;</p></td>
+					<td>
+					<a style="font-size:16px;" href="javascript:if(confirm('确认删除吗?'))window.location='/deleBooks/?bookid={{ post.bookid }}'">删除</a> 
+					</td>
+					
+	</div>
+		</tr>
+	<script>
+					var x={{post.state}};
+					if (x=='0')
+						{
+						document.getElementById({{post.bookid}}).style.display='none';
+						}
+					
+					</script>
+    {% endfor %}
+
+</table>
+  </div>
+		
+		
+		<div>
+		<p style="font-size:25px;color:white">书名搜索</p>
+			<iframe src="/search" width="450" height="600" frameborder="0"></iframe>
+			</div>
+  </div>
+{% endblock %}
